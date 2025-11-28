@@ -6,7 +6,6 @@ const int CAPACIDAD_INICIAL_PREMIOS = 5;
 Actor::Actor() 
     : Cineasta(), premios(nullptr), numPremios(0), capacidadPremios(0), tipoActor() {}
 
-
 Actor::Actor(int idActor, const MyString& nom, const MyString& apel, const MyString& tipo)
     : Cineasta(idActor, nom, apel), 
       premios(nullptr), numPremios(0), capacidadPremios(0), tipoActor(tipo) {}
@@ -66,14 +65,27 @@ void Actor::redimensionarPremios(int nuevaCapacidad) {
 }
 
 void Actor::abrirPerfil() {
-    std::cout << "=== Perfil de Actor ===" << std::endl;
+    std::cout << "\n========================================" << std::endl;
+    std::cout << "       PERFIL DE ACTOR" << std::endl;
+    std::cout << "========================================" << std::endl;
     std::cout << "Nombre: " << nombre.obtenerTexto() << " " << apellido.obtenerTexto() << std::endl;
+    std::cout << "ID: " << id << std::endl;
     std::cout << "Tipo: " << tipoActor.obtenerTexto() << std::endl;
-    std::cout << "Premios: " << numPremios << std::endl;
+
+    if (numPremios > 0) {
+        std::cout << "\nPREMIOS (" << numPremios << "):" << std::endl;
+        for (int i = 0; i < numPremios; ++i) {
+            std::cout << "  - " << premios[i].obtenerTexto() << std::endl;
+        }
+    } else {
+        std::cout << "\nNo tiene premios registrados." << std::endl;
+    }
+
+    std::cout << "========================================" << std::endl;
 }
 
 void Actor::mostrarFilmografia() {
-    std::cout << "Filmografia del actor " << nombre.obtenerTexto() << ":" << std::endl;
+    std::cout << "\nFilmografia del actor " << nombre.obtenerTexto() << ":" << std::endl;
     std::cout << "(Lista de peliculas en las que ha actuado)" << std::endl;
 }
 
