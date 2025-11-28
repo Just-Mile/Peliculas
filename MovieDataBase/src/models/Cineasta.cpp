@@ -6,13 +6,11 @@ Cineasta::Cineasta() : id(0), edad(0) {}
 Cineasta::Cineasta(int idCineasta, const MyString& nom, const MyString& apel)
     : id(idCineasta), nombre(nom), apellido(apel), edad(0) {}
 
-
 Cineasta::Cineasta(const Cineasta& otro)
     : id(otro.id), nombre(otro.nombre), apellido(otro.apellido),
       edad(otro.edad), nacionalidad(otro.nacionalidad),
       biografia(otro.biografia), fechaNacimiento(otro.fechaNacimiento),
       lugarNacimiento(otro.lugarNacimiento) {}
-
 
 Cineasta& Cineasta::operator=(const Cineasta& otro) {
     if (this == &otro) return *this;
@@ -32,7 +30,7 @@ Cineasta& Cineasta::operator=(const Cineasta& otro) {
 Cineasta::~Cineasta() {}
 
 void Cineasta::obtenerPeliculas() {
-    std::cout << "Obteniendo filmografia de: " << nombre.obtenerTexto() 
+    std::cout << "Peliculas relacionadas con " << nombre.obtenerTexto() 
               << " " << apellido.obtenerTexto() << std::endl;
 }
 
@@ -42,7 +40,7 @@ int Cineasta::calcularEdad() const {
 
 void Cineasta::actualizarBiografia(const MyString& texto) {
     biografia = texto;
-    std::cout << "Biografia actualizada" << std::endl;
+    std::cout << "Biografia actualizada para " << nombre.obtenerTexto() << std::endl;
 }
 
 int Cineasta::obtenerId() const {
