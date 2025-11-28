@@ -42,14 +42,15 @@ bool Menu::hacerLogin() {
     display.limpiarPantalla();
     display.mostrarBienvenida();
 
-   
+    cout << "========================================" << endl;
     cout << "         INICIO DE SESION              " << endl;
-    
+    cout << "========================================" << endl;
     cout << "\nUsuarios disponibles para prueba:" << endl;
     cout << "  - admin (contrasena: 1234)" << endl;
     cout << "  - juan (contrasena: pass123)" << endl;
     cout << "  - maria (contrasena: maria456)" << endl;
-    
+    cout << "========================================\n" << endl;
+
     char usuario[50];
     char password[50];
 
@@ -64,9 +65,9 @@ bool Menu::hacerLogin() {
             usuarioLogueado = usuarioEncontrado;
 
             display.limpiarPantalla();
-          
+            cout << "\n========================================" << endl;
             cout << "   LOGIN EXITOSO!" << endl;
-            
+            cout << "========================================" << endl;
             cout << "\nBienvenido(a), " << usuarioActual << "!" << endl;
             cout << "\nPresiona ENTER para continuar al menu principal...";
             cin.get();
@@ -76,9 +77,9 @@ bool Menu::hacerLogin() {
     }
 
     display.limpiarPantalla();
-   
+    cout << "\n========================================" << endl;
     cout << "   ERROR DE AUTENTICACION" << endl;
-    
+    cout << "========================================" << endl;
     cout << "\nUsuario o contrasena incorrectos." << endl;
     cout << "Por favor, verifica tus credenciales.\n" << endl;
     display.pausar();
@@ -88,14 +89,15 @@ bool Menu::hacerLogin() {
 void Menu::mostrarMenuYEjecutar() {
     display.limpiarPantalla();
 
-    
+    cout << "========================================" << endl;
     cout << "   SISTEMA DE PELICULAS" << endl;
-    
+    cout << "========================================" << endl;
     cout << "Usuario: " << usuarioActual << endl;
-  
+    cout << "========================================\n" << endl;
+
     display.mostrarMenuPrincipal();
 
-    int opcion = input.leerOpcion("\nSelecciona una opcion (1-5): ", 1, 5);
+    int opcion = input.leerOpcion("\nSelecciona una opcion (1-7): ", 1, 7);
     ejecutarOpcion(opcion);
 }
 
@@ -114,6 +116,12 @@ void Menu::ejecutarOpcion(int opcion) {
             filtrarPorGenero();
             break;
         case 5:
+            mostrarActores();
+            break;
+        case 6:
+            mostrarDirectores();
+            break;
+        case 7:
             cerrarSesion();
             break;
     }
@@ -124,17 +132,16 @@ void Menu::mostrarDetallePelicula(Movie* pelicula) {
 
     display.limpiarPantalla();
 
-    
+    cout << "========================================" << endl;
     cout << "       DETALLES DE LA PELICULA" << endl;
-   
+    cout << "========================================" << endl;
     cout << "Usuario: " << usuarioActual << endl;
-   
+    cout << "========================================\n" << endl;
 
     cout << "TITULO: " << pelicula->obtenerTitulo().obtenerTexto() << endl;
     cout << "ID: " << pelicula->obtenerId() << endl;
     cout << "CALIFICACION METASCORE: " << pelicula->obtenerCalificacionMetascore() << endl;
 
-    // Mostrar géneros
     const MyString* generos = pelicula->obtenerGeneros();
     int numGeneros = pelicula->obtenerNumGeneros();
     if (numGeneros > 0) {
@@ -144,7 +151,6 @@ void Menu::mostrarDetallePelicula(Movie* pelicula) {
         }
     }
 
-    
     const MyString* directores = pelicula->obtenerDirectores();
     int numDirectores = pelicula->obtenerNumDirectores();
     if (numDirectores > 0) {
@@ -154,7 +160,6 @@ void Menu::mostrarDetallePelicula(Movie* pelicula) {
         }
     }
 
-    
     const MyString* idiomas = pelicula->obtenerIdiomas();
     int numIdiomas = pelicula->obtenerNumIdiomas();
     if (numIdiomas > 0) {
@@ -164,16 +169,15 @@ void Menu::mostrarDetallePelicula(Movie* pelicula) {
         }
     }
 
-   
+    cout << "\n========================================" << endl;
     cout << "OPCIONES:" << endl;
     cout << "1. Agregar a favoritos" << endl;
     cout << "2. Volver al menu" << endl;
-    
+    cout << "========================================" << endl;
 
     int opcion = input.leerOpcion("\nSelecciona una opcion (1-2): ", 1, 2);
 
     if (opcion == 1) {
-        
         if (usuarioLogueado->esFavorita(pelicula)) {
             cout << "\nEsta pelicula ya esta en tus favoritos." << endl;
         } else {
@@ -187,11 +191,12 @@ void Menu::mostrarDetallePelicula(Movie* pelicula) {
 void Menu::mostrarSeccionPeliculas() {
     display.limpiarPantalla();
 
-    
+    cout << "========================================" << endl;
     cout << "       CATALOGO DE PELICULAS" << endl;
-   
+    cout << "========================================" << endl;
     cout << "Usuario: " << usuarioActual << endl;
-   
+    cout << "========================================\n" << endl;
+
     int numPeliculas = db->obtenerNumPeliculas();
 
     if (numPeliculas == 0) {
@@ -209,7 +214,8 @@ void Menu::mostrarSeccionPeliculas() {
     }
 
     cout << "\n[0] Volver al menu principal" << endl;
-   
+    cout << "========================================" << endl;
+
     int opcion = input.leerOpcion("\nIngresa el numero de la pelicula (0 para salir): ", 0, numPeliculas);
 
     if (opcion > 0) {
@@ -221,10 +227,11 @@ void Menu::mostrarSeccionPeliculas() {
 void Menu::mostrarFavoritos() {
     display.limpiarPantalla();
 
+    cout << "========================================" << endl;
     cout << "       MIS PELICULAS FAVORITAS" << endl;
-    
+    cout << "========================================" << endl;
     cout << "Usuario: " << usuarioActual << endl;
-    
+    cout << "========================================\n" << endl;
 
     if (usuarioLogueado != nullptr) {
         int numFavoritas = usuarioLogueado->obtenerNumFavoritas();
@@ -248,27 +255,33 @@ void Menu::mostrarFavoritos() {
 void Menu::buscarPorTitulo() {
     display.limpiarPantalla();
 
-   
+    cout << "========================================" << endl;
     cout << "       BUSCAR PELICULA POR TITULO" << endl;
-   
+    cout << "========================================" << endl;
     cout << "Usuario: " << usuarioActual << endl;
-   
+    cout << "========================================\n" << endl;
+
+    cout << "Peliculas disponibles:" << endl;
+    int total = db->obtenerNumPeliculas();
+    const Movie* todasLasPeliculas = db->obtenerPeliculas();
+    for (int i = 0; i < total; ++i) {
+        cout << "  - " << todasLasPeliculas[i].obtenerTitulo().obtenerTexto() << endl;
+    }
+    cout << "========================================\n" << endl;
 
     char titulo[100];
-    input.leerTexto("Ingresa el titulo (o parte del titulo): ", titulo, 100);
+    input.leerTexto("Ingresa el titulo (o parte): ", titulo, 100);
 
     MyString tituloBuscar(titulo);
     int numResultados = 0;
     Movie* resultados = db->buscarPeliculasPorTitulo(tituloBuscar, numResultados);
 
-    
-    cout << "  RESULTADOS DE BUSQUEDA" << endl;
-   
-    cout << "Buscando: '" << titulo << "'" << endl;
-    
+    cout << "\n========================================" << endl;
+    cout << "  RESULTADOS" << endl;
+    cout << "========================================" << endl;
+
     if (numResultados == 0) {
-        cout << "No se encontraron peliculas que coincidan" << endl;
-        cout << "con el criterio de busqueda.\n" << endl;
+        cout << "No se encontraron peliculas.\n" << endl;
 
         if (resultados != nullptr) {
             delete[] resultados;
@@ -285,9 +298,10 @@ void Menu::buscarPorTitulo() {
         cout << " (Metascore: " << resultados[i].obtenerCalificacionMetascore() << ")" << endl;
     }
 
-    cout << "\n[0] Volver al menu principal" << endl;
-  
-    int opcion = input.leerOpcion("\nIngresa el numero de la pelicula (0 para salir): ", 0, numResultados);
+    cout << "\n[0] Volver" << endl;
+    cout << "========================================" << endl;
+
+    int opcion = input.leerOpcion("\nSelecciona (0 para salir): ", 0, numResultados);
 
     if (opcion > 0) {
         Movie* peliculaSeleccionada = db->buscarPeliculaPorId(resultados[opcion - 1].obtenerId());
@@ -302,22 +316,14 @@ void Menu::buscarPorTitulo() {
 void Menu::filtrarPorGenero() {
     display.limpiarPantalla();
 
-  
+    cout << "========================================" << endl;
     cout << "       FILTRAR POR GENERO" << endl;
-  
+    cout << "========================================" << endl;
     cout << "Usuario: " << usuarioActual << endl;
-  
+    cout << "========================================\n" << endl;
 
-    cout << "Generos disponibles:" << endl;
-    cout << "  - Accion" << endl;
-    cout << "  - Ciencia Ficcion" << endl;
-    cout << "  - Aventura" << endl;
-    cout << "  - Fantasia" << endl;
-    cout << "  - Animacion" << endl;
-    cout << "  - Familia" << endl;
-    cout << "  - Thriller" << endl;
-    cout << "  - Drama" << endl;
-   
+    cout << "Generos: Accion, Drama, Animacion, Thriller, Aventura, Fantasia, Familia, Ciencia Ficcion\n" << endl;
+
     char genero[50];
     input.leerTexto("Ingresa el genero: ", genero, 50);
 
@@ -325,14 +331,12 @@ void Menu::filtrarPorGenero() {
     int numResultados = 0;
     Movie* resultados = db->filtrarPeliculasPorGenero(generoBuscar, numResultados);
 
- 
-    cout << "  RESULTADOS DEL FILTRO" << endl;
-    
-    cout << "Genero: '" << genero << "'" << endl;
-    
+    cout << "\n========================================" << endl;
+    cout << "  RESULTADOS" << endl;
+    cout << "========================================" << endl;
 
     if (numResultados == 0) {
-        cout << "No se encontraron peliculas de ese genero.\n" << endl;
+        cout << "No se encontraron peliculas.\n" << endl;
 
         if (resultados != nullptr) {
             delete[] resultados;
@@ -349,9 +353,10 @@ void Menu::filtrarPorGenero() {
         cout << " (Metascore: " << resultados[i].obtenerCalificacionMetascore() << ")" << endl;
     }
 
-    cout << "\n[0] Volver al menu principal" << endl;
-  
-    int opcion = input.leerOpcion("\nIngresa el numero de la pelicula (0 para salir): ", 0, numResultados);
+    cout << "\n[0] Volver" << endl;
+    cout << "========================================" << endl;
+
+    int opcion = input.leerOpcion("\nSelecciona (0 para salir): ", 0, numResultados);
 
     if (opcion > 0) {
         Movie* peliculaSeleccionada = db->buscarPeliculaPorId(resultados[opcion - 1].obtenerId());
@@ -363,15 +368,105 @@ void Menu::filtrarPorGenero() {
     }
 }
 
+void Menu::mostrarActores() {
+    display.limpiarPantalla();
+
+    cout << "========================================" << endl;
+    cout << "       LISTA DE ACTORES" << endl;
+    cout << "========================================" << endl;
+    cout << "Usuario: " << usuarioActual << endl;
+    cout << "========================================\n" << endl;
+
+    int numActores = db->obtenerNumActores();
+
+    if (numActores == 0) {
+        cout << "No hay actores registrados.\n" << endl;
+        display.pausar();
+        return;
+    }
+
+    cout << "Total de actores: " << numActores << "\n" << endl;
+
+    const Actor* actores = db->obtenerActores();
+    for (int i = 0; i < numActores; ++i) {
+        cout << "[" << (i + 1) << "] " 
+             << actores[i].obtenerNombre().obtenerTexto() << " "
+             << actores[i].obtenerApellido().obtenerTexto() 
+             << " - " << actores[i].obtenerTipoActor().obtenerTexto() << endl;
+    }
+
+    cout << "\n[0] Volver" << endl;
+    cout << "========================================" << endl;
+
+    int opcion = input.leerOpcion("\nSelecciona (0 para salir): ", 0, numActores);
+
+    if (opcion > 0) {
+        display.limpiarPantalla();
+
+     
+        Actor* actorSeleccionado = db->buscarActorPorId(actores[opcion - 1].obtenerId());
+        if (actorSeleccionado != nullptr) {
+            actorSeleccionado->abrirPerfil();
+        }
+
+        display.pausar();
+    }
+}
+
+void Menu::mostrarDirectores() {
+    display.limpiarPantalla();
+
+    cout << "========================================" << endl;
+    cout << "       LISTA DE DIRECTORES" << endl;
+    cout << "========================================" << endl;
+    cout << "Usuario: " << usuarioActual << endl;
+    cout << "========================================\n" << endl;
+
+    int numDirectores = db->obtenerNumDirectores();
+
+    if (numDirectores == 0) {
+        cout << "No hay directores registrados.\n" << endl;
+        display.pausar();
+        return;
+    }
+
+    cout << "Total de directores: " << numDirectores << "\n" << endl;
+
+    const Director* directores = db->obtenerDirectores();
+    for (int i = 0; i < numDirectores; ++i) {
+        cout << "[" << (i + 1) << "] " 
+             << directores[i].obtenerNombre().obtenerTexto() << " "
+             << directores[i].obtenerApellido().obtenerTexto() 
+             << " - " << directores[i].obtenerEstiloDirector().obtenerTexto() << endl;
+    }
+
+    cout << "\n[0] Volver" << endl;
+    cout << "========================================" << endl;
+
+    int opcion = input.leerOpcion("\nSelecciona (0 para salir): ", 0, numDirectores);
+
+    if (opcion > 0) {
+        display.limpiarPantalla();
+
+        
+        Director* directorSeleccionado = db->buscarDirectorPorId(directores[opcion - 1].obtenerId());
+        if (directorSeleccionado != nullptr) {
+            directorSeleccionado->abrirPerfil();
+        }
+
+        display.pausar();
+    }
+}
+
 void Menu::cerrarSesion() {
     display.limpiarPantalla();
 
-    
+    cout << "\n========================================" << endl;
     cout << "       CERRANDO SESION..." << endl;
-
+    cout << "========================================" << endl;
     cout << "\nHasta pronto, " << usuarioActual << "!" << endl;
     cout << "\nGracias por usar el Sistema de Peliculas.\n" << endl;
-  
+    cout << "========================================\n" << endl;
 
     display.pausar();
 
