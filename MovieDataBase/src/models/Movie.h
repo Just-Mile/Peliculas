@@ -1,82 +1,137 @@
-#ifndef MOVIE_H
-#define MOVIE_H
+#ifndef MOVIE_HPP
+#define MOVIE_HPP
 
-#include "MyString.hpp" 
+#include "MyString.hpp"
+#include "Usuario.hpp"
 
 class Movie {
 private:
-    
+   
     int id;
-    MyString titulo;          
-    MyString duracionMinutos; 
-    MyString estudio;         
-    MyString sinopsis;        
+    MyString titulo;
     int fechaEstreno;
-    double calificacionIMDB;
-    double calificacionRottenTomatoes;
-    double calificacionMetascore;
-    MyString idiomaOriginal;      
-    MyString paisOrigen;          
-    bool esAnimacion;
+    int duracionMinutos;
+    MyString sinopsis;
+    MyString estudio;
+    MyString idiomaOriginal;
 
-    MyString* idiomasDisponibles; 
-    int numIdiomas;              
-    int capacidadIdiomas;        
+    
+    MyString idiomasDisponibles[20];
+    int numIdiomas;
 
-    MyString* premios;           
-    int numPremios;              
-    int capacidadPremios;        
-
-    MyString* directores;
-    int numDirectores;
-    int capacidadDirectores;
-
-    MyString* generos;
+    MyString generos[20];
     int numGeneros;
-    int capacidadGeneros;
 
-    void redimensionarIdiomas(int nuevaCapacidad);
-    void redimensionarPremios(int nuevaCapacidad);
-    void redimensionarDirectores(int nuevaCapacidad);
-    void redimensionarGeneros(int nuevaCapacidad);
+    MyString premios[20];
+    int numPremios;
+
+   
+    MyString directores[20];
+    int numDirectores;
+
+    
+    double calificacionRottenTomatoes;
+    double calificacionIMDb;
+    double calificacionMetascore;
+    double calificacionPopular;
+
+  
+    MyString paisOrigen;
+    bool esAnimacion;
+    MyString clasificacion;
+
+    
+    MyString resenaContenido;
+    double resenaCalificacion;
+    MyString resenaFecha;
+    int resenaLikes;
+    int resenaDislikes;
+    Usuario* resenaAutor;
+
+    
+    int generoId;
 
 public:
-    Movie(); 
-    Movie(const Movie& otro);
-    Movie& operator=(const Movie& otro);
-    ~Movie();
+    Movie();
 
+    // Setters
+    void asignarId(int);
+    void asignarTitulo(const MyString&);
+    void asignarFechaEstreno(int);
+    void asignarDuracionMinutos(int);
+    void asignarSinopsis(const MyString&);
+    void asignarEstudio(const MyString&);
+    void asignarIdiomaOriginal(const MyString&);
+
+    void agregarIdiomaDisponible(const MyString&);
+    void agregarIdioma(const MyString&);  
+
+    void agregarGenero(const MyString&);
+    void agregarPremio(const MyString&);
+
+    void agregarDirector(const MyString&); 
+
+    void asignarCalificacionRotten(double);
+    void asignarCalificacionIMDb(double);
+    void asignarCalificacionMetascore(double);
+    void asignarCalificacionPopular(double);
+
+    
+    void asignarCalificacionIMDB(double c) { asignarCalificacionIMDb(c); }
+    void asignarCalificacionRottenTomatoes(double c) { asignarCalificacionRotten(c); }
+
+    void asignarPaisOrigen(const MyString&);
+    void asignarEsAnimacion(bool);
+    void asignarClasificacion(const MyString&);
+
+    void asignarResenaContenido(const MyString&);
+    void asignarResenaCalificacion(double);
+    void asignarResenaFecha(const MyString&);
+    void asignarResenaLikes(int);
+    void asignarResenaDislikes(int);
+    void asignarResenaAutor(Usuario*);
+
+    void asignarGeneroId(int);
+
+    // Getters
     int obtenerId() const;
-    void asignarId(int nuevoId);
-
     MyString obtenerTitulo() const;
-    void asignarTitulo(const MyString& nuevoTitulo);
-
+    int obtenerFechaEstreno() const;
+    int obtenerDuracionMinutos() const;
+    MyString obtenerSinopsis() const;
+    MyString obtenerEstudio() const;
     MyString obtenerIdiomaOriginal() const;
-    void asignarIdiomaOriginal(const MyString& idioma); 
 
-    MyString obtenerPaisOrigen() const;
-    void asignarPaisOrigen(const MyString& pais);
-
-    double obtenerCalificacionMetascore() const;
-    void asignarCalificacionMetascore(double calificacion);
-
-    void agregarIdioma(const MyString& idioma);
-    void agregarPremio(const MyString& premio);   
-    void agregarDirector(const MyString& director);
-    void agregarGenero(const MyString& genero); 
-
+    const MyString* obtenerIdiomasDisponibles() const;
     const MyString* obtenerIdiomas() const; 
     int obtenerNumIdiomas() const;
 
     const MyString* obtenerGeneros() const;
     int obtenerNumGeneros() const;
 
-    const MyString* obtenerDirectores() const;
+    const MyString* obtenerPremios() const;
+    int obtenerNumPremios() const;
+
+    const MyString* obtenerDirectores() const;  
     int obtenerNumDirectores() const;
 
-    void mostrarInformacionCompleta() const;
-    double calcularRT() const;
+    double obtenerCalificacionRotten() const;
+    double obtenerCalificacionIMDb() const;
+    double obtenerCalificacionMetascore() const;
+    double obtenerCalificacionPopular() const;
+
+    MyString obtenerPaisOrigen() const;
+    bool obtenerEsAnimacion() const;
+    MyString obtenerClasificacion() const;
+
+    MyString obtenerResenaContenido() const;
+    double obtenerResenaCalificacion() const;
+    MyString obtenerResenaFecha() const;
+    int obtenerResenaLikes() const;
+    int obtenerResenaDislikes() const;
+    Usuario* obtenerResenaAutor() const;
+
+    int obtenerGeneroId() const;
 };
 
 #endif
