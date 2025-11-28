@@ -3,12 +3,15 @@
 
 const int CAPACIDAD_INICIAL_PREMIOS_DIR = 5;
 
-Director::Director() : Cineasta(), premios(nullptr), numPremios(0), 
-                       capacidadPremios(0), anosExperiencia(0) {}
+Director::Director() 
+    : Cineasta(), estiloDirector(), premios(nullptr), numPremios(0), 
+      capacidadPremios(0), anosExperiencia(0) {}
 
 Director::Director(int idDirector, const MyString& nom, const MyString& apel, const MyString& estilo)
-    : Cineasta(idDirector, nom, apel), estiloDirector(estilo), 
-      premios(nullptr), numPremios(0), capacidadPremios(0), anosExperiencia(0) {}
+    : Cineasta(idDirector, nom, apel), 
+      estiloDirector(estilo),
+      premios(nullptr), numPremios(0), capacidadPremios(0), 
+      anosExperiencia(0) {}
 
 Director::~Director() {
     if (premios != nullptr) {
@@ -17,8 +20,10 @@ Director::~Director() {
 }
 
 Director::Director(const Director& otro)
-    : Cineasta(otro), estiloDirector(otro.estiloDirector), 
-      numPremios(otro.numPremios), capacidadPremios(otro.capacidadPremios),
+    : Cineasta(otro), 
+      estiloDirector(otro.estiloDirector),
+      premios(nullptr), numPremios(otro.numPremios), 
+      capacidadPremios(otro.capacidadPremios),
       anosExperiencia(otro.anosExperiencia) {
 
     if (otro.premios != nullptr) {
@@ -26,8 +31,6 @@ Director::Director(const Director& otro)
         for (int i = 0; i < numPremios; ++i) {
             premios[i] = otro.premios[i];
         }
-    } else {
-        premios = nullptr;
     }
 }
 
@@ -68,15 +71,28 @@ void Director::redimensionarPremios(int nuevaCapacidad) {
 }
 
 void Director::abrirPerfil() {
-    std::cout << "=== Perfil de Director ===" << std::endl;
+    std::cout << "\n========================================" << std::endl;
+    std::cout << "       PERFIL DE DIRECTOR" << std::endl;
+    std::cout << "========================================" << std::endl;
     std::cout << "Nombre: " << nombre.obtenerTexto() << " " << apellido.obtenerTexto() << std::endl;
+    std::cout << "ID: " << id << std::endl;
     std::cout << "Estilo: " << estiloDirector.obtenerTexto() << std::endl;
-    std::cout << "Premios: " << numPremios << std::endl;
     std::cout << "Anos de experiencia: " << anosExperiencia << std::endl;
+
+    if (numPremios > 0) {
+        std::cout << "\nPREMIOS (" << numPremios << "):" << std::endl;
+        for (int i = 0; i < numPremios; ++i) {
+            std::cout << "  - " << premios[i].obtenerTexto() << std::endl;
+        }
+    } else {
+        std::cout << "\nNo tiene premios registrados." << std::endl;
+    }
+
+    std::cout << "========================================" << std::endl;
 }
 
 void Director::mostrarFilmografia() {
-    std::cout << "Filmografia del director " << nombre.obtenerTexto() << ":" << std::endl;
+    std::cout << "\nFilmografia del director " << nombre.obtenerTexto() << ":" << std::endl;
     std::cout << "(Lista de peliculas dirigidas)" << std::endl;
 }
 
