@@ -22,8 +22,11 @@ private:
     void mostrarFavoritos();
     void buscarPorTitulo();
     void filtrarPorGenero();
+    void mostrarActores();
+    void mostrarDirectores();
     void cerrarSesion();
     void mostrarDetallePelicula(Movie* pelicula);  
+
     bool compararTexto(const char* texto1, const char* texto2);
     void copiarTexto(char* destino, const char* origen);
 
