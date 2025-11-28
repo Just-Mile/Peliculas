@@ -2,6 +2,7 @@
 #include <cstdlib>
 using namespace std;
 
+//
 void DisplayHelper::limpiarPantalla() {
     #ifdef _WIN32
         int resultado = system("cls");
@@ -13,10 +14,11 @@ void DisplayHelper::limpiarPantalla() {
 }
 
 void DisplayHelper::mostrarBienvenida() {
-   
-    
+    cout << "\n========================================" << endl;
+    cout << "                                        " << endl;
     cout << "   SISTEMA DE GESTION DE PELICULAS     " << endl;
-    
+    cout << "                                        " << endl;
+    cout << "========================================\n" << endl;
 }
 
 void DisplayHelper::mostrarMenuPrincipal() {
@@ -26,7 +28,9 @@ void DisplayHelper::mostrarMenuPrincipal() {
     cout << " 2. Mis peliculas favoritas" << endl;
     cout << " 3. Buscar pelicula por titulo" << endl;
     cout << " 4. Filtrar peliculas por genero" << endl;
-    cout << " 5. Cerrar sesion" << endl;
+    cout << " 5. Ver actores" << endl;
+    cout << " 6. Ver directores" << endl;
+    cout << " 7. Cerrar sesion" << endl;
     cout << "========================================" << endl;
 }
 
