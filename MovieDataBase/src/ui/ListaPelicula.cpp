@@ -104,3 +104,4 @@ Movie** ListaPelicula::obtenerArray() {
 const Movie** ListaPelicula::obtenerArray() const {
     return const_cast<const Movie**>(peliculas);
 }
+
